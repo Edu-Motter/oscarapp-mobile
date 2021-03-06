@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.edumotter.oscar.R;
-import com.edumotter.oscar.apiOscar.RetrofitConfig;
+import com.edumotter.oscar.services.RetrofitConfig;
 import com.edumotter.oscar.models.UserLogin;
 
 import retrofit2.Call;
@@ -58,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
             exception.printStackTrace();
         }
 
-
-        it = new Intent(this, FilmsActivity.class);
+        it = new Intent(this, DashboardActivity.class);
         startActivity(it);
+        finish();
     }
 }

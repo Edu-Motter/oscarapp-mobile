@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FilmsActivity">
+    tools:context=".activities.ConfirmVoteActivity">
 
     <Button
-        android:id="@+id/buttonFilmVote"
+        android:id="@+id/buttonConfirmVote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:text="Votar"
+        android:text="Confirmar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewFilmsTitle"
+        android:id="@+id/textViewConfirmTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Filmes"
+        android:text="Confirmar Voto?"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
         android:textSize="24sp"
