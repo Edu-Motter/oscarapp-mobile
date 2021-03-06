@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Oscar">
-        <activity android:name=".activities.DashboardActivity"></activity>
+        <activity android:name=".activities.FilmsActivity"></activity>
+        <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
