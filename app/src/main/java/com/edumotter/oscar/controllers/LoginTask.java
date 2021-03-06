@@ -33,7 +33,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
         this.progressDialog = progressDialog;
         this.user = user;
     }
-    
+
     @Override
     protected String doInBackground(String... strings) {
         String stringURL = strings[0];
