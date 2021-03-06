@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.edumotter.oscar.models.User;
-import com.edumotter.oscar.activities.Dashboard;
+import com.edumotter.oscar.activities.DashboardActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +33,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
         this.progressDialog = progressDialog;
         this.user = user;
     }
-
+    
     @Override
     protected String doInBackground(String... strings) {
         String stringURL = strings[0];
@@ -106,7 +106,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
         }
 
         user = new User();
-        Intent intent = new Intent(context, Dashboard.class);
+        Intent intent = new Intent(context, DashboardActivity.class);
         intent.putExtra("user", user.toString());
         context.startActivity(intent);
     }
