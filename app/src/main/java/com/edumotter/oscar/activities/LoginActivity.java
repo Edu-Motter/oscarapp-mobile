@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClick(View view){
-        UserLogin userLogin = new UserLogin("Eduardo", "444");
+        UserLogin userLogin = new UserLogin("Eduardo", "123");
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Realizando login");
@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        progressDialog.dismiss();
 
         it = new Intent(this, DashboardActivity.class);
         startActivity(it);
