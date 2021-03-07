@@ -57,7 +57,7 @@ public class ConfirmVoteActivity extends AppCompatActivity {
             textViewConfirmTitle.setText("Escolha o diretor que deseja votar");
         }
 
-        System.out.println(userSession.getFilm());
+        
     }
 
     public void onClickConfirm(View view){
