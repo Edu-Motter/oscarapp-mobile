@@ -39,6 +39,8 @@ public class DashboardActivity extends AppCompatActivity {
         textViewDashboardTitle = findViewById(R.id.textViewDashboardTitle);
         String userName = String.valueOf(userSession.getLogin());
         textViewDashboardTitle.setText("Bem vindo ao The Oscar App " + userName);
+
+
     }
 
     @Override
@@ -77,4 +79,6 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

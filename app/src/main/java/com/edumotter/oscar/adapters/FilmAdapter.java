@@ -68,7 +68,9 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> 
 //            e.printStackTrace();
 //        }
 
-        holder.movieImage = film.getImage();
+//        holder.movieImage = film.getImage();
+
+        holder.movieImage.setImageResource(R.drawable.film);
         holder.movieType.setText(String.valueOf(film.getGenre()));
         holder.movieName.setText(String.valueOf(film.getName()));
     }

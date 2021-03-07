@@ -48,10 +48,10 @@ public class FilmsActivity extends AppCompatActivity {
             public void onResponse(Call<List<Film>> call, Response<List<Film>> response) {
                 if(response.isSuccessful()) {
                     films = response.body();
-                    for (Film film : films) {
-                        Picasso.with(FilmsActivity.this).load("http://wecodecorp.com.br/ufpr/imagens/passageiros.jpeg").into(imageViewFilm);
-                        film.setImage(imageViewFilm);
-                    }
+//                    for (Film film : films) {
+//                        Picasso.with(FilmsActivity.this).load("http://wecodecorp.com.br/ufpr/imagens/passageiros.jpeg").into(imageViewFilm);
+//                        film.setImage(imageViewFilm);
+//                    }
                     for (Film film : films)
                     {
                         FilmAdapter = new FilmAdapter(films);
