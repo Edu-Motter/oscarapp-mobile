@@ -2,6 +2,7 @@ package com.edumotter.oscar.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -64,6 +65,10 @@ public class ConfirmVoteActivity extends AppCompatActivity {
     }
 
     public void onClickConfirm(View view){
+        ProgressDialog progressDialog = new ProgressDialog(ConfirmVoteActivity.this);
+        progressDialog.setMessage("Confirmando voto");
+        progressDialog.show();
+
         userVote = new UserVote();
         userVote.setIdDirector(userSession.getDirector().getId());
         userVote.setIdFilm(userSession.getFilm().getId());
@@ -77,11 +82,13 @@ public class ConfirmVoteActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<UserVote> call, Response<UserVote> response) {
                     if (response.code() >= 200 && response.code() <= 299) {
+                        progressDialog.dismiss();
                         Intent it = new Intent(ConfirmVoteActivity.this, VotedActivity.class);
                         startActivity(it);
                         finish();
                     }
                     else{
+                        progressDialog.dismiss();
                         Toast.makeText(ConfirmVoteActivity.this, "Não foi possível registrar seu voto! Verifique seu Token.", Toast.LENGTH_SHORT).show();
                     }
                 }

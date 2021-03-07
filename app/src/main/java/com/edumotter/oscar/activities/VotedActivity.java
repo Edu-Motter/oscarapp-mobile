@@ -37,7 +37,6 @@ public class VotedActivity extends AppCompatActivity {
         startActivity(it);
         finish();
 
-        //Criar toast caso o usuario errar o token:
     }
 
 

@@ -2,6 +2,7 @@ package com.edumotter.oscar.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -39,11 +40,19 @@ public class DirectorsActivity extends AppCompatActivity {
         Session session = (Session) getApplicationContext();
         userSession = session.getUserSession();
 
+        ProgressDialog progressDialog = new ProgressDialog(DirectorsActivity.this);
+        progressDialog.setMessage("Buscando Diretores!");
+        progressDialog.show();
+
+
         Call<List<Director>> call = new RetrofitConfig().getOscarService().getDirectors();
         call.enqueue((new Callback<List<Director>>() {
             @Override
             public void onResponse(Call<List<Director>> call, Response<List<Director>> response) {
+
                 if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+
                     directors = response.body();
                     for (Director director : directors) {
                         int i = director.getId().intValue();
@@ -63,6 +72,9 @@ public class DirectorsActivity extends AppCompatActivity {
                         }
                         System.out.println(director.getName());
                     }
+                }else{
+                    Toast.makeText(DirectorsActivity.this, "A requisição deu erro!", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
 

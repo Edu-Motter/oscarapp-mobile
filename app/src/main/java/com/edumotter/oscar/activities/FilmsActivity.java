@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.edumotter.oscar.R;
 import com.edumotter.oscar.RecyclerItemClickListener;
@@ -41,12 +43,18 @@ public class FilmsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewFilms);
 
 
+        ProgressDialog progressDialog = new ProgressDialog(FilmsActivity.this);
+        progressDialog.setMessage("Buscando Filmes!");
+        progressDialog.show();
 
         Call<List<Film>> call = new RetrofitConfig().getOscarService().getFilms();
         call.enqueue((new Callback<List<Film>>() {
             @Override
             public void onResponse(Call<List<Film>> call, Response<List<Film>> response) {
+
                 if(response.isSuccessful()) {
+                    progressDialog.dismiss();
+
                     films = response.body();
 //                    for (Film film : films) {
 //                        Picasso.with(FilmsActivity.this).load("http://wecodecorp.com.br/ufpr/imagens/passageiros.jpeg").into(imageViewFilm);
@@ -85,7 +93,11 @@ public class FilmsActivity extends AppCompatActivity {
 
 
                     }
+                }else{
+                    Toast.makeText(FilmsActivity.this, "A requisição deu erro!", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
+
             }
 
             @Override
