@@ -11,6 +11,7 @@ import com.edumotter.oscar.R;
 import com.edumotter.oscar.models.User;
 import com.edumotter.oscar.services.RetrofitConfig;
 import com.edumotter.oscar.models.Director;
+import com.edumotter.oscar.utils.Session;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class DirectorsActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radio_director_one, radio_director_two, radio_director_three, radio_director_four;
     User userSession;
+    Director director;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class DirectorsActivity extends AppCompatActivity {
         radio_director_two = findViewById(R.id.radio_director_two);
         radio_director_three = findViewById(R.id.radio_director_three);
         radio_director_four = findViewById(R.id.radio_director_four);
+        Session session = (Session) getApplicationContext();
+        userSession = session.getUserSession();
 
         Call<List<Director>> call = new RetrofitConfig().getOscarService().getDirectors();
         call.enqueue((new Callback<List<Director>>() {
@@ -76,7 +80,8 @@ public class DirectorsActivity extends AppCompatActivity {
             int radioButtonID = radioGroup.getCheckedRadioButtonId();
             View radioButton = radioGroup.findViewById(radioButtonID);
             int idx = radioGroup.indexOfChild(radioButton);
-            userSession.setDirector(directors.get(idx + 1));
+            director = directors.get(idx + 1);
+            userSession.setDirector(director);
         }
     }
 }
