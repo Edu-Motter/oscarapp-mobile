@@ -25,7 +25,7 @@ public class DetailedFilmActivity extends AppCompatActivity {
 //        TextView textViewFilm = findViewById(R.id.textViewFilm);
 //        TextView textViewFilmType = findViewById(R.id.textViewFilmsTitle);
 //        ImageView imageViewImage = findViewById(R.id.imageViewDetailImage);
-
+//
 //        textViewFilm.setText(film.getName());
 //        textViewFilmType.setText(film.getGenre());
 //        textViewState.setText(club.getState());
