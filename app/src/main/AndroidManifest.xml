@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Oscar">
-        <activity android:name=".activities.ConfirmVoteActivity"></activity>
+        <activity android:name=".activities.VotedActivity"></activity>
+        <activity android:name=".activities.ConfirmVoteActivity" />
         <activity android:name=".activities.DetailedFilmActivity" />
         <activity android:name=".activities.DirectorsActivity" />
         <activity android:name=".activities.FilmsActivity" />

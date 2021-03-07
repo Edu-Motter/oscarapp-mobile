@@ -8,16 +8,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.edumotter.oscar.R;
 
 public class DashboardActivity extends AppCompatActivity {
     private Intent it;
+    ImageView imageViewOscar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        imageViewOscar = findViewById(R.id.imageViewOscar);
+        imageViewOscar.setImageResource(R.drawable.oscar);
+
     }
 
     @Override

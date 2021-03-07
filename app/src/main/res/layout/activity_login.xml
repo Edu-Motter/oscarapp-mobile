@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Oscar App"
+        android:text="Bem vindo"
         android:textColor="@color/teal_700"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Username:"
+        android:text="Nome:"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
         app:layout_constraintStart_toStartOf="@+id/editTextUsername" />
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Password:"
+        android:text="Senha:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
