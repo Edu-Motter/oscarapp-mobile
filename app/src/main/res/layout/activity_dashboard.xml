@@ -6,41 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".activities.DashboardActivity">
 
-    <ImageView
-        android:id="@+id/imageViewOscar"
-        android:layout_width="0dp"
-        android:layout_height="432dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <TextView
         android:id="@+id/textViewDashboardTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
-        android:text="Token recebido:"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:text="welcomeMessage"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewOscar"
+        android:layout_width="0dp"
+        android:layout_height="286dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDashboardToken"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDashboardTitle"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textViewDashboardToken"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
-        android:text="32"
+        android:text="userToken"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewDashboardTitle" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
