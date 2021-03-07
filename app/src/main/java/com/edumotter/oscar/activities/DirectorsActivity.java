@@ -3,6 +3,7 @@ package com.edumotter.oscar.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.edumotter.oscar.R;
 import com.edumotter.oscar.services.RetrofitConfig;
@@ -38,5 +39,9 @@ public class DirectorsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Director>> call, Throwable t) {}
         }));
+    }
+
+    public void onRadioButtonClicked(View view) {
+
     }
 }
