@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.edumotter.oscar.R;
 import com.edumotter.oscar.models.User;
@@ -73,7 +74,7 @@ public class DirectorsActivity extends AppCompatActivity {
     public void onVoteClick(View view) {
         if(radioGroup.getCheckedRadioButtonId() == -1)
         {
-            System.out.println("nenhum checado");
+            Toast.makeText(this, "Por favor, selecione um filme", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -82,6 +83,7 @@ public class DirectorsActivity extends AppCompatActivity {
             int idx = radioGroup.indexOfChild(radioButton);
             director = directors.get(idx + 1);
             userSession.setDirector(director);
+            Toast.makeText(this, "Parabéns, você acabou de votar no diretor!", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Realizando login");
         progressDialog.show();
 
-        userSession.setLogin("Eduardo");
+        userSession.setLogin("Carlos");
         userSession.setPassword("123");
         try {
             Call<User> call = new RetrofitConfig().getOscarService().login(userSession);

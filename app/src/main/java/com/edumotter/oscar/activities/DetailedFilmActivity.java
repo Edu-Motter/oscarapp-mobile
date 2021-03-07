@@ -26,23 +26,19 @@ public class DetailedFilmActivity extends AppCompatActivity {
         userSession = session.getUserSession();
 
         position = getIntent().getIntExtra("position", position);
-        Film film = FilmsActivity.films.get(position);
-
-
-        System.out.println(film.getName());
+        film = FilmsActivity.films.get(position);
 
         TextView textViewFilm = findViewById(R.id.textViewFilm);
         TextView textViewFilmType = findViewById(R.id.textViewType);
 //        ImageView imageViewImage = findViewById(R.id.imageViewDetailImage);
-//
+
         textViewFilm.setText(film.getName());
         textViewFilmType.setText(film.getGenre());
-//        textViewState.setText(club.getState());
 
     }
 
     public void onVoteFilmClick(View view) {
         userSession.setFilm(film);
-        Toast.makeText(this, "Parabéns, você acabou de votar no filme!" + userSession.getFilm().getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Parabéns, você acabou de votar no filme!", Toast.LENGTH_SHORT).show();
     }
 }

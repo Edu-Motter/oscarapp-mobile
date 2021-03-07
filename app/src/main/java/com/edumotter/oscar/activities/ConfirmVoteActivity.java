@@ -75,6 +75,11 @@ public class ConfirmVoteActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call<UserVote> call, Response<UserVote> response) {
+                    if (response.code() >= 200 && response.code() <= 299) {
+                        Intent it = new Intent(ConfirmVoteActivity.this, VotedActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
                 }
 
                 @Override

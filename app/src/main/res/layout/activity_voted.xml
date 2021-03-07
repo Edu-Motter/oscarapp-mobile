@@ -13,7 +13,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="40dp"
-        android:text="Obrigado por contrinuir ao The Oscar App"
+        android:text="Obrigado por contribuir ao The Oscar App"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
         android:textSize="24sp"
