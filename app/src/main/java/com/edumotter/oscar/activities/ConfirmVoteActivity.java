@@ -14,14 +14,20 @@ import com.edumotter.oscar.R;
 import com.edumotter.oscar.models.Director;
 import com.edumotter.oscar.models.Film;
 import com.edumotter.oscar.models.User;
+import com.edumotter.oscar.models.UserVote;
+import com.edumotter.oscar.services.RetrofitConfig;
 import com.edumotter.oscar.utils.Session;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ConfirmVoteActivity extends AppCompatActivity {
-    TextView textViewConfirmError, textViewFilmName, textViewDirectorName, textViewConfirmTitle;
+    TextView textViewFilmName, textViewDirectorName, textViewConfirmTitle;
     ImageView imageViewConfirmFilm;
-    EditText editTextConfirmToken;
     User userSession;
     Button buttonConfirmVote;
+    UserVote userVote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,9 @@ public class ConfirmVoteActivity extends AppCompatActivity {
         Session session = (Session) getApplicationContext();
         userSession = session.getUserSession();
 
+        Film film = new Film((long) 1,"La La Land", "Musical", "-", null);
+        userSession.setFilm(film);
+
         imageViewConfirmFilm.setImageResource(R.drawable.film);
         textViewFilmName.setText(userSession.getFilm().getName());
         textViewDirectorName.setText(userSession.getDirector().getName());
@@ -51,14 +60,31 @@ public class ConfirmVoteActivity extends AppCompatActivity {
             buttonConfirmVote.setEnabled(false);
             textViewConfirmTitle.setText("Escolha o diretor que deseja votar");
         }
-
-        
     }
 
     public void onClickConfirm(View view){
-        Intent it = new Intent(this, LoginActivity.class);
-        startActivity(it);
-        finish();
+        userVote = new UserVote();
+        userVote.setIdDirector(userSession.getDirector().getId());
+        userVote.setIdFilm(userSession.getFilm().getId());
+        userVote.setToken(userSession.getToken());
+        userVote.setIdUser(userSession.getId());
+
+        try {
+            Call<UserVote> call = new RetrofitConfig().getOscarService().userVote(userVote);
+            call.enqueue(new Callback<UserVote>() {
+
+                @Override
+                public void onResponse(Call<UserVote> call, Response<UserVote> response) {
+                }
+
+                @Override
+                public void onFailure(Call<UserVote> call, Throwable t) {
+                }
+            });
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
         //Criar toast caso o usuario errar o token:
     }

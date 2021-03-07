@@ -4,9 +4,9 @@ public class UserVote {
     private Long idUser;
     private Long idFilm;
     private Long idDirector;
-    private Long token;
+    private int token;
 
-    public UserVote(Long idUser, Long idFilm, Long idDirector, Long token) {
+    public UserVote(Long idUser, Long idFilm, Long idDirector, int token) {
         this.idUser = idUser;
         this.idFilm = idFilm;
         this.idDirector = idDirector;
@@ -40,11 +40,11 @@ public class UserVote {
         this.idDirector = idDirector;
     }
 
-    public Long getToken() {
+    public int getToken() {
         return token;
     }
 
-    public void setToken(Long token) {
+    public void setToken(int token) {
         this.token = token;
     }
 }
