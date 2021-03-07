@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edumotter.oscar.R;
 import com.edumotter.oscar.models.Director;
@@ -80,10 +81,14 @@ public class ConfirmVoteActivity extends AppCompatActivity {
                         startActivity(it);
                         finish();
                     }
+                    else{
+                        Toast.makeText(ConfirmVoteActivity.this, "Não foi possível registrar seu voto! Verifique seu Token.", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<UserVote> call, Throwable t) {
+
                 }
             });
 

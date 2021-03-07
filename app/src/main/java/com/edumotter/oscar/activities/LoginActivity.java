@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edumotter.oscar.R;
 import com.edumotter.oscar.models.User;
@@ -74,7 +75,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     } else {
                         progressDialog.dismiss();
-                        textViewError.setText("Login ou Senha incorreto(s)");
+                        Toast.makeText(LoginActivity.this, "Login ou Senha incorreto(s)!", Toast.LENGTH_SHORT).show();
+
+
                     }
 
                 }
