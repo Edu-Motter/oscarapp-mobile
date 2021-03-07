@@ -28,9 +28,8 @@ public class ConfirmVoteActivity extends AppCompatActivity {
 
         imageViewConfirmFilm = findViewById(R.id.imageViewConfirmFilm);
         imageViewConfirmFilm.setImageResource(R.drawable.film);
-        //textViewFilmName.findViewById(R.id.textViewFilmName);
-        //textViewDirectorName.findViewById(R.id.textViewDirectorName);
-
+        textViewFilmName = findViewById(R.id.textViewFilmName);
+        textViewDirectorName = findViewById(R.id.textViewDirectorName);
 
 
 //        Session session = (Session) getApplicationContext();
@@ -43,11 +42,9 @@ public class ConfirmVoteActivity extends AppCompatActivity {
 //
 //        imageViewConfirmFilm = findViewById(R.id.imageViewConfirmFilm);
 //        imageViewConfirmFilm.setImageResource(R.drawable.film);
-//
-//
-//
-//        textViewFilmName.setText(userSession.getFilm().getName());
-//        textViewDirectorName.setText(userSession.getDirector().getName());
+
+        textViewFilmName.setText(userSession.getFilm().getName());
+        textViewDirectorName.setText(userSession.getDirector().getName());
     }
 
     public void onClickConfirm(View view){

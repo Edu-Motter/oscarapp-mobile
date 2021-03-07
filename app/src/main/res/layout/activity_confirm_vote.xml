@@ -89,10 +89,10 @@
         android:id="@+id/editTextConfirmToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="35dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/textViewConfirmError"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmVote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
@@ -106,14 +106,4 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextConfirmToken"
         app:layout_constraintStart_toStartOf="@+id/editTextConfirmToken" />
 
-    <TextView
-        android:id="@+id/textViewConfirmError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:textColor="@color/design_default_color_error"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmVote"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
