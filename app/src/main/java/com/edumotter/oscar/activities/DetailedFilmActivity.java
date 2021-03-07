@@ -16,7 +16,7 @@ import com.edumotter.oscar.utils.Session;
 public class DetailedFilmActivity extends AppCompatActivity {
     protected int position;
     private Film film;
-    private User userSession;
+    User userSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,6 @@ public class DetailedFilmActivity extends AppCompatActivity {
 
     public void onVoteFilmClick(View view) {
         userSession.setFilm(film);
-        Toast.makeText(this, "Parabéns, você acabou de votar no filme!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Parabéns, você acabou de votar no filme!" + userSession.getFilm().getName(), Toast.LENGTH_SHORT).show();
     }
 }

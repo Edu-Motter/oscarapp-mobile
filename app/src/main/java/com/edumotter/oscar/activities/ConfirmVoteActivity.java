@@ -37,9 +37,6 @@ public class ConfirmVoteActivity extends AppCompatActivity {
         Session session = (Session) getApplicationContext();
         userSession = session.getUserSession();
 
-        Film film = new Film((long) 1,"La La Land", "Musical", "-", null);
-        userSession.setFilm(film);
-
         imageViewConfirmFilm.setImageResource(R.drawable.film);
         textViewFilmName.setText(userSession.getFilm().getName());
         textViewDirectorName.setText(userSession.getDirector().getName());
