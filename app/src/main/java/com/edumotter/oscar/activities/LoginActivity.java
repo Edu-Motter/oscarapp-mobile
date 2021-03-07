@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
 import com.edumotter.oscar.R;
 import com.edumotter.oscar.services.RetrofitConfig;
 import com.edumotter.oscar.models.UserLogin;
+import com.edumotter.oscar.utils.MyApplication;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +28,9 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
+        MyApplication mApp = (MyApplication) getApplicationContext();
+        String globalVarValue = mApp.getGlobalVarValue();
+        System.out.println(globalVarValue);
     }
 
     public void onClick(View view){
