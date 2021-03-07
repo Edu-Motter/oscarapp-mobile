@@ -34,7 +34,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> 
             super(itemView);
             movieName = itemView.findViewById(R.id.textViewFilm);
             movieType = itemView.findViewById(R.id.textViewType);
-//            movieImage = itemView.findViewById(R.id.imageViewFilm);
+            movieImage = itemView.findViewById(R.id.imageViewFilm);
         }
     }
 
@@ -56,6 +56,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> 
 
         Film film = Films.get(position);
 
+
 //        String url = film.getPhoto();
 //
 //        try {
@@ -67,6 +68,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> 
 //            e.printStackTrace();
 //        }
 
+        holder.movieImage = film.getImage();
         holder.movieType.setText(String.valueOf(film.getGenre()));
         holder.movieName.setText(String.valueOf(film.getName()));
     }
