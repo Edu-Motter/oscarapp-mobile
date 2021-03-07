@@ -7,7 +7,7 @@
     tools:context=".activities.DashboardActivity">
 
     <TextView
-        android:id="@+id/textViewDashboardTitle"
+        android:id="@+id/textViewFilmDetailedName"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
@@ -20,21 +20,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageViewOscar"
+        android:id="@+id/imageViewFilmDetailedImage"
         android:layout_width="0dp"
         android:layout_height="286dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDashboardToken"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFilmDetailedGenre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDashboardTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFilmDetailedName"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textViewDashboardToken"
+        android:id="@+id/textViewFilmDetailedGenre"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginBottom="16dp"

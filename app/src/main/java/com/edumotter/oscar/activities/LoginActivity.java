@@ -38,13 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         userSession = session.getUserSession();
     }
 
-    public void onClick(View view){
+    public void onClick(View view) {
         ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setMessage("Realizando login");
+        progressDialog.setMessage("Realizando login..");
         progressDialog.show();
 
-        userSession.setLogin("Eduardo");
-        userSession.setPassword("123");
+        userSession.setLogin(editTextUsername.getText().toString());
+        userSession.setPassword(editTextPassword.getText().toString());
+
         try {
             Call<User> call = new RetrofitConfig().getOscarService().login(userSession);
             call.enqueue(new Callback<User>() {
@@ -61,23 +62,22 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.body().getDirector() != null)
                             userSession.setDirector(response.body().getDirector());
 
-                        if(userSession.getFilm().getId() != 0 && userSession.getDirector().getId() != 0){
+                        if (userSession.getFilm().getId() != 0 && userSession.getDirector().getId() != 0) {
                             progressDialog.dismiss();
                             it = new Intent(LoginActivity.this, VotedActivity.class);
                             startActivity(it);
                             finish();
-                        } else{
-                            progressDialog.dismiss();
+                        } else {
                             it = new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivity(it);
+
+                            progressDialog.dismiss();
                             finish();
                         }
 
                     } else {
                         progressDialog.dismiss();
                         Toast.makeText(LoginActivity.this, "Login ou Senha incorreto(s)!", Toast.LENGTH_SHORT).show();
-
-
                     }
 
                 }

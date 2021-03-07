@@ -7,18 +7,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edumotter.oscar.R;
-import com.edumotter.oscar.models.Director;
-import com.edumotter.oscar.models.Film;
 import com.edumotter.oscar.models.User;
 import com.edumotter.oscar.models.UserVote;
 import com.edumotter.oscar.services.RetrofitConfig;
 import com.edumotter.oscar.utils.Session;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +31,10 @@ public class ConfirmVoteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ProgressDialog progressDialogOnCreate = new ProgressDialog(this);
+        progressDialogOnCreate.setMessage("Carregando..");
+        progressDialogOnCreate.show();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_vote);
 
@@ -45,28 +47,49 @@ public class ConfirmVoteActivity extends AppCompatActivity {
         Session session = (Session) getApplicationContext();
         userSession = session.getUserSession();
 
-        Film film = new Film((long) 1,"La La Land", "Musical", "-", null);
-        userSession.setFilm(film);
+        if(userSession.getFilm().getId() == 0 || userSession.getDirector().getId() == 0){
+            buttonConfirmVote.setEnabled(false);
+            textViewConfirmTitle.setText("Escolha o filme e diretor que deseja votar");
+            textViewFilmName.setText(userSession.getFilm().getName());
+            textViewDirectorName.setText(userSession.getDirector().getName());
+            imageViewConfirmFilm.setImageResource(R.drawable.film);
+        } else {
+            Picasso.get().load(userSession.getFilm().getPhoto())
+                    .placeholder(R.drawable.loading_film)
+                    .error(R.drawable.erro_film)
+                    .fit()
+                    .noFade()
+                    .into(imageViewConfirmFilm, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                        }
 
-        imageViewConfirmFilm.setImageResource(R.drawable.film);
-        textViewFilmName.setText(userSession.getFilm().getName());
-        textViewDirectorName.setText(userSession.getDirector().getName());
+                        @Override
+                        public void onError(Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+            textViewFilmName.setText(userSession.getFilm().getName());
+            textViewDirectorName.setText(userSession.getDirector().getName());
 
-        if(userSession.getDirector().getId() == 0 && userSession.getFilm().getId() == 0){
-            buttonConfirmVote.setEnabled(false);
-            textViewConfirmTitle.setText("Escolha o filme e diretor deseja votar");
-        } else if (userSession.getFilm().getId() == 0){
-            buttonConfirmVote.setEnabled(false);
-            textViewConfirmTitle.setText("Escolha o filme que deseja votar");
-        } else if (userSession.getDirector().getId() == 0) {
-            buttonConfirmVote.setEnabled(false);
-            textViewConfirmTitle.setText("Escolha o diretor que deseja votar");
+            if (userSession.getDirector().getId() == 0 && userSession.getFilm().getId() == 0) {
+                buttonConfirmVote.setEnabled(false);
+                textViewConfirmTitle.setText("Escolha o filme e diretor deseja votar");
+            } else if (userSession.getFilm().getId() == 0) {
+                buttonConfirmVote.setEnabled(false);
+                textViewConfirmTitle.setText("Escolha o filme que deseja votar");
+            } else if (userSession.getDirector().getId() == 0) {
+                buttonConfirmVote.setEnabled(false);
+                textViewConfirmTitle.setText("Escolha o diretor que deseja votar");
+            }
         }
+
+        progressDialogOnCreate.dismiss();
     }
 
-    public void onClickConfirm(View view){
+    public void onClickConfirm(View view) {
         ProgressDialog progressDialog = new ProgressDialog(ConfirmVoteActivity.this);
-        progressDialog.setMessage("Confirmando voto");
+        progressDialog.setMessage("Confirmando voto..");
         progressDialog.show();
 
         userVote = new UserVote();
@@ -78,31 +101,26 @@ public class ConfirmVoteActivity extends AppCompatActivity {
         try {
             Call<UserVote> call = new RetrofitConfig().getOscarService().userVote(userVote);
             call.enqueue(new Callback<UserVote>() {
-
                 @Override
                 public void onResponse(Call<UserVote> call, Response<UserVote> response) {
                     if (response.code() >= 200 && response.code() <= 299) {
-                        progressDialog.dismiss();
                         Intent it = new Intent(ConfirmVoteActivity.this, VotedActivity.class);
                         startActivity(it);
-                        finish();
-                    }
-                    else{
+
                         progressDialog.dismiss();
-                        Toast.makeText(ConfirmVoteActivity.this, "Não foi possível registrar seu voto! Verifique seu Token.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        progressDialog.dismiss();
+                        Toast.makeText(ConfirmVoteActivity.this, "Não foi possível registrar seu voto! Verifique seu Token!", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<UserVote> call, Throwable t) {
-
                 }
             });
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        //Criar toast caso o usuario errar o token:
     }
 }

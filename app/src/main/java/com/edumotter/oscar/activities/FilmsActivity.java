@@ -9,17 +9,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.edumotter.oscar.R;
-import com.edumotter.oscar.RecyclerItemClickListener;
 import com.edumotter.oscar.adapters.FilmAdapter;
 import com.edumotter.oscar.services.RetrofitConfig;
 import com.edumotter.oscar.models.Film;
-import com.squareup.picasso.Picasso;
+import com.edumotter.oscar.utils.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,85 +27,61 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FilmsActivity extends AppCompatActivity {
-    public static List<Film> films =  new ArrayList<>();
+    public static List<Film> films = new ArrayList<>();
     private RecyclerView recyclerView;
     private FilmAdapter FilmAdapter;
-    public ImageView imageViewFilm;
-    //private com.edumotter.oscar.adapters.FilmsAdapter filmsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Carregando filmes..");
+        progressDialog.show();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_films);
-
-        recyclerView = findViewById(R.id.recyclerViewFilms);
-
-
-        ProgressDialog progressDialog = new ProgressDialog(FilmsActivity.this);
-        progressDialog.setMessage("Buscando Filmes!");
-        progressDialog.show();
 
         Call<List<Film>> call = new RetrofitConfig().getOscarService().getFilms();
         call.enqueue((new Callback<List<Film>>() {
             @Override
             public void onResponse(Call<List<Film>> call, Response<List<Film>> response) {
-
-                if(response.isSuccessful()) {
-                    progressDialog.dismiss();
-
+                if (response.isSuccessful()) {
                     films = response.body();
-//                    for (Film film : films) {
-//                        Picasso.with(FilmsActivity.this).load("http://wecodecorp.com.br/ufpr/imagens/passageiros.jpeg").into(imageViewFilm);
-//                        film.setImage(imageViewFilm);
-//                    }
-                    for (Film film : films)
-                    {
-                        FilmAdapter = new FilmAdapter(films);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(getApplicationContext());
-                        recyclerView.setLayoutManager(layoutManager);
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView.addItemDecoration(new
-                                DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
-                        recyclerView.setAdapter(FilmAdapter);
+                    films.remove(0);
+                    FilmAdapter = new FilmAdapter(films);
 
-                        recyclerView.addOnItemTouchListener(
-                                new RecyclerItemClickListener(
-                                        getApplicationContext(),
-                                        new RecyclerItemClickListener.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(View view, int position) {
-                                                Film film = films.get(position);
-                                                Intent intent = new Intent(FilmsActivity.this, DetailedFilmActivity.class);
-                                                intent.putExtra("position", position);
-                                                startActivity(intent);
-                                            }
+                    recyclerView = findViewById(R.id.recyclerViewFilms);
+                    RecyclerView.LayoutManager layoutManager =
+                            new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.addItemDecoration(new
+                            DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+                    recyclerView.setAdapter(FilmAdapter);
+                    recyclerView.addOnItemTouchListener(
+                            new RecyclerItemClickListener(
+                                    getApplicationContext(),
+                                    new RecyclerItemClickListener.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(View view, int position) {
 
-                                            @Override
-                                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                                            }
+                                            Intent intent = new Intent(FilmsActivity.this, DetailedFilmActivity.class);
+                                            intent.putExtra("position", position);
+                                            startActivity(intent);
                                         }
-                                )
-                        );
 
-
-                    }
-                }else{
-                    Toast.makeText(FilmsActivity.this, "A requisição deu erro!", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                                    }
+                            )
+                    );
+                } else {
+                    System.out.println("Request ERROR: \n" + response.toString());
                 }
-
+                progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<Film>> call, Throwable t) {
             }
         }));
-
-
-
-
     }
 
 }

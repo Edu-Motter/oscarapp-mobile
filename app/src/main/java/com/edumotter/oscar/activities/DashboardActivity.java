@@ -29,18 +29,16 @@ public class DashboardActivity extends AppCompatActivity {
         Session session = (Session) getApplicationContext();
         userSession = session.getUserSession();
 
-        imageViewOscar = findViewById(R.id.imageViewOscar);
+        imageViewOscar = findViewById(R.id.imageViewFilmDetailedImage);
         imageViewOscar.setImageResource(R.drawable.oscar);
 
-        textViewDashboardToken = findViewById(R.id.textViewDashboardToken);
+        textViewDashboardToken = findViewById(R.id.textViewFilmDetailedGenre);
         String token = String.valueOf(userSession.getToken());
         textViewDashboardToken.setText("Token recebido: " + token);
 
-        textViewDashboardTitle = findViewById(R.id.textViewDashboardTitle);
+        textViewDashboardTitle = findViewById(R.id.textViewFilmDetailedName);
         String userName = String.valueOf(userSession.getLogin());
         textViewDashboardTitle.setText("Bem vindo ao The Oscar App " + userName);
-
-
     }
 
     @Override

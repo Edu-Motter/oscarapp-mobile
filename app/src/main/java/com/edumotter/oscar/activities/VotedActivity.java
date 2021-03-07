@@ -19,24 +19,17 @@ public class VotedActivity extends AppCompatActivity {
 
         Session session = (Session) getApplicationContext();
 
-        System.out.println(session.getUserSession().getLogin());
-        System.out.println(session.getUserSession().getDirector().getName());
-        System.out.println(session.getUserSession().getFilm().getName());
-
-
         TextView textViewFilm = findViewById(R.id.textViewF);
         TextView textViewFilmType = findViewById(R.id.textViewD);
 
         textViewFilm.setText(session.getUserSession().getFilm().getName());
         textViewFilmType.setText(session.getUserSession().getDirector().getName());
-
     }
 
     public void onClickReturnLogin(View view){
         Intent it = new Intent(this, LoginActivity.class);
         startActivity(it);
         finish();
-
     }
 
 

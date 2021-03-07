@@ -12,6 +12,8 @@ import com.edumotter.oscar.R;
 import com.edumotter.oscar.models.Film;
 import com.edumotter.oscar.models.User;
 import com.edumotter.oscar.utils.Session;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 public class DetailedFilmActivity extends AppCompatActivity {
     protected int position;
@@ -28,12 +30,27 @@ public class DetailedFilmActivity extends AppCompatActivity {
         position = getIntent().getIntExtra("position", position);
         film = FilmsActivity.films.get(position);
 
-        TextView textViewFilm = findViewById(R.id.textViewFilm);
-        TextView textViewFilmType = findViewById(R.id.textViewType);
-//        ImageView imageViewImage = findViewById(R.id.imageViewDetailImage);
+        TextView textViewFilm = findViewById(R.id.textViewFilmDetailedName);
+        TextView textViewFilmType = findViewById(R.id.textViewFilmDetailedGenre);
+        ImageView imageViewFilm = findViewById(R.id.imageViewFilmDetailedImage);
 
         textViewFilm.setText(film.getName());
         textViewFilmType.setText(film.getGenre());
+        Picasso.get().load(film.getPhoto())
+                .placeholder(R.drawable.loading_film)
+                .error(R.drawable.erro_film)
+                .fit()
+                .noFade()
+                .into(imageViewFilm, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
     }
 

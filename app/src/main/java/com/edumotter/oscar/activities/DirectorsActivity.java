@@ -30,33 +30,28 @@ public class DirectorsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ProgressDialog progressDialog = new ProgressDialog(DirectorsActivity.this);
+        progressDialog.setMessage("Buscando Diretores..");
+        progressDialog.show();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directors);
+
         radioGroup = findViewById(R.id.radioGroup);
         radio_director_one = findViewById(R.id.radio_director_one);
         radio_director_two = findViewById(R.id.radio_director_two);
         radio_director_three = findViewById(R.id.radio_director_three);
         radio_director_four = findViewById(R.id.radio_director_four);
-        Session session = (Session) getApplicationContext();
-        userSession = session.getUserSession();
-
-        ProgressDialog progressDialog = new ProgressDialog(DirectorsActivity.this);
-        progressDialog.setMessage("Buscando Diretores!");
-        progressDialog.show();
-
 
         Call<List<Director>> call = new RetrofitConfig().getOscarService().getDirectors();
         call.enqueue((new Callback<List<Director>>() {
             @Override
             public void onResponse(Call<List<Director>> call, Response<List<Director>> response) {
-
                 if (response.isSuccessful()) {
-                    progressDialog.dismiss();
-
                     directors = response.body();
                     for (Director director : directors) {
                         int i = director.getId().intValue();
-                        switch(i) {
+                        switch (i) {
                             case 1:
                                 radio_director_one.setText(director.getName());
                                 break;
@@ -69,27 +64,30 @@ public class DirectorsActivity extends AppCompatActivity {
                             case 4:
                                 radio_director_four.setText(director.getName());
                                 break;
+                            default:
+                                radio_director_one.setText("Não encontrado");
+                                break;
                         }
-                        System.out.println(director.getName());
                     }
-                }else{
-                    Toast.makeText(DirectorsActivity.this, "A requisição deu erro!", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                } else {
+                    System.out.println("Request ERROR: \n" + response.toString());
                 }
+                progressDialog.dismiss();
             }
 
             @Override
-            public void onFailure(Call<List<Director>> call, Throwable t) {}
+            public void onFailure(Call<List<Director>> call, Throwable t) {
+            }
         }));
     }
 
-    public void onVoteClick(View view) {
-        if(radioGroup.getCheckedRadioButtonId() == -1)
-        {
-            Toast.makeText(this, "Por favor, selecione um filme", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+    public void onVoteDirectorClick(View view) {
+        if (radioGroup.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(this, "Por favor, selecione um diretor!", Toast.LENGTH_SHORT).show();
+        } else {
+            Session session = (Session) getApplicationContext();
+            userSession = session.getUserSession();
+
             int radioButtonID = radioGroup.getCheckedRadioButtonId();
             View radioButton = radioGroup.findViewById(radioButtonID);
             int idx = radioGroup.indexOfChild(radioButton);

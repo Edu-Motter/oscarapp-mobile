@@ -1,7 +1,6 @@
 package com.edumotter.oscar.adapters;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.edumotter.oscar.R;
 import com.edumotter.oscar.models.Film;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> {
 
     private List<Film> Films;
+
+    public FilmAdapter(List<Film> Films) {
+        this.Films = Films;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView movieName, movieType;
@@ -36,10 +36,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> 
             movieType = itemView.findViewById(R.id.textViewType);
             movieImage = itemView.findViewById(R.id.imageViewFilm);
         }
-    }
-
-    public FilmAdapter(List<Film> Films) {
-        this.Films = Films;
     }
 
     @NonNull
@@ -55,24 +51,33 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Film film = Films.get(position);
+        if(film.getId() != 0){
+            if(film.getPhoto() != null && !film.getPhoto().isEmpty()){
+                Picasso.get().load(film.getPhoto())
+                    .placeholder(R.drawable.loading_film)
+                    .error(R.drawable.erro_film)
+                    .fit()
+                    .noFade()
+                    .into(holder.movieImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            film.setImage(holder.movieImage);
+                        }
 
+                        @Override
+                        public void onError(Exception e) {
+                            e.printStackTrace();
+                            film.setImage(holder.movieImage);
+                        }
+                    });
+            } else {
+                holder.movieImage.setImageResource(R.drawable.film);
+            }
 
-//        String url = film.getPhoto();
-//
-//        try {
-//            Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(url).getContent());
-//            holder.movieImage.setImageBitmap(bitmap);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+            holder.movieType.setText(String.valueOf(film.getGenre()));
+            holder.movieName.setText(String.valueOf(film.getName()));
+        }
 
-//        holder.movieImage = film.getImage();
-
-        holder.movieImage.setImageResource(R.drawable.film);
-        holder.movieType.setText(String.valueOf(film.getGenre()));
-        holder.movieName.setText(String.valueOf(film.getName()));
     }
 
     @Override

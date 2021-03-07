@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:onClick="onVoteFilmClick"
-    android:orientation="vertical"
     tools:context=".activities.DetailedFilmActivity">
 
     <TextView
-        android:id="@+id/textViewDetailName"
+        android:id="@+id/textViewFilmDetailedName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:textSize="30sp" />
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Nome do Filme"
+        android:textAlignment="center"
+        android:textColor="@color/teal_200"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageViewFilm"
-        android:layout_width="200sp"
-        android:layout_height="200sp"
-        android:gravity="center" />
+        android:id="@+id/imageViewFilmDetailedImage"
+        android:layout_width="wrap_content"
+        android:layout_height="368dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFilmDetailedGenre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFilmDetailedName"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textViewFilm"
+        android:id="@+id/textViewFilmDetailedGenre"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/textViewType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:textSize="30sp" />
+        android:layout_height="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="genero"
+        android:textAlignment="center"
+        android:textColor="@color/teal_200"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonFilmDetailed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonFilmDetailed"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:onClick="onVoteFilmClick"
-        android:text="Votar" />
+        android:text="Votar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
