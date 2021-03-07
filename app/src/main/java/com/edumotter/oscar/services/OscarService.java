@@ -2,7 +2,7 @@ package com.edumotter.oscar.services;
 
 import com.edumotter.oscar.models.Director;
 import com.edumotter.oscar.models.Film;
-import com.edumotter.oscar.models.UserLogin;
+import com.edumotter.oscar.models.User;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface OscarService {
     Call<List<Film>> getFilms();
 
     @POST("users/login")
-    Call<UserLogin> login(@Body UserLogin userLogin);
+    Call<User> login(@Body User user);
 
 
 }
