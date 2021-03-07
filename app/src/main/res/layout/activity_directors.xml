@@ -20,12 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="198dp"
+        android:onClick="onVoteClick"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/buttonDirectorVote"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,28 +38,24 @@
             android:id="@+id/radio_director_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="um" />
+            android:text="" />
 
         <RadioButton
             android:id="@+id/radio_director_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="dois" />
+            android:text="" />
 
         <RadioButton
             android:id="@+id/radio_director_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="tres" />
+            android:text="" />
 
         <RadioButton
             android:id="@+id/radio_director_four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:text="quatro" />
     </RadioGroup>
 
@@ -66,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
+        android:onClick="onVoteClick"
         android:text="Votar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

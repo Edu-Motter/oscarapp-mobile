@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Realizando login");
         progressDialog.show();
 
-//      userSession.setLogin(editTextUsername.getText().toString());
-//      userSession.setPassword(editTextPassword.getText().toString());
         userSession.setLogin("Admin");
         userSession.setPassword("123");
         try {
