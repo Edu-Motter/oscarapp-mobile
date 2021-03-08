@@ -10,7 +10,7 @@
         android:id="@+id/textViewDirectorsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="Diretores"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
@@ -26,42 +26,21 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
         android:onClick="onVoteDirectorClick"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDirectorVote"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDirectorsTitle">
-
-        <RadioButton
-            android:id="@+id/radio_director_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <RadioButton
-            android:id="@+id/radio_director_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <RadioButton
-            android:id="@+id/radio_director_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <RadioButton
-            android:id="@+id/radio_director_four"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/textViewDirectorsTitle"
+        app:layout_constraintVertical_bias="0.22000003" />
 
     <Button
         android:id="@+id/buttonDirectorVote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="340dp"
         android:onClick="onVoteDirectorClick"
         android:text="Votar"
         app:layout_constraintBottom_toBottomOf="parent"

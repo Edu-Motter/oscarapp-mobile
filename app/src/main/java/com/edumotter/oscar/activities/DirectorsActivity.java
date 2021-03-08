@@ -24,13 +24,13 @@ import retrofit2.Response;
 public class DirectorsActivity extends AppCompatActivity {
     private List<Director> directors;
     private RadioGroup radioGroup;
-    private RadioButton radio_director_one, radio_director_two, radio_director_three, radio_director_four;
     User userSession;
     Director director;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ProgressDialog progressDialog = new ProgressDialog(DirectorsActivity.this);
+        radioGroup = findViewById(R.id.radioGroup);
         progressDialog.setMessage("Buscando Diretores..");
         progressDialog.show();
 
@@ -38,10 +38,6 @@ public class DirectorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_directors);
 
         radioGroup = findViewById(R.id.radioGroup);
-        radio_director_one = findViewById(R.id.radio_director_one);
-        radio_director_two = findViewById(R.id.radio_director_two);
-        radio_director_three = findViewById(R.id.radio_director_three);
-        radio_director_four = findViewById(R.id.radio_director_four);
 
         Call<List<Director>> call = new RetrofitConfig().getOscarService().getDirectors();
         call.enqueue((new Callback<List<Director>>() {
@@ -50,27 +46,14 @@ public class DirectorsActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     directors = response.body();
                     for (Director director : directors) {
-                        int i = director.getId().intValue();
-                        switch (i) {
-                            case 1:
-                                radio_director_one.setText(director.getName());
-                                break;
-                            case 2:
-                                radio_director_two.setText(director.getName());
-                                break;
-                            case 3:
-                                radio_director_three.setText(director.getName());
-                                break;
-                            case 4:
-                                radio_director_four.setText(director.getName());
-                                break;
-                            default:
-                                radio_director_one.setText("Não encontrado");
-                                break;
+                        int directorRadioId = director.getId().intValue();
+                        if (directorRadioId != 0) {
+                            RadioButton radioButton = new RadioButton(DirectorsActivity.this);
+                            radioButton.setId(directorRadioId);
+                            radioButton.setText(director.getName());
+                            radioGroup.addView(radioButton);
                         }
                     }
-                } else {
-                    System.out.println("Request ERROR: \n" + response.toString());
                 }
                 progressDialog.dismiss();
             }
@@ -88,10 +71,8 @@ public class DirectorsActivity extends AppCompatActivity {
             Session session = (Session) getApplicationContext();
             userSession = session.getUserSession();
 
-            int radioButtonID = radioGroup.getCheckedRadioButtonId();
-            View radioButton = radioGroup.findViewById(radioButtonID);
-            int idx = radioGroup.indexOfChild(radioButton);
-            director = directors.get(idx + 1);
+            int voteId = radioGroup.getCheckedRadioButtonId();
+            director = directors.get(voteId);
             userSession.setDirector(director);
             Toast.makeText(this, "Parabéns, você acabou de votar no diretor!", Toast.LENGTH_SHORT).show();
         }

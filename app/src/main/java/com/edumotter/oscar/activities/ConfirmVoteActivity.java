@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class ConfirmVoteActivity extends AppCompatActivity {
     TextView textViewFilmName, textViewDirectorName, textViewConfirmTitle;
+    EditText editTextConfirmToken;
     ImageView imageViewConfirmFilm;
     User userSession;
     Button buttonConfirmVote;
@@ -38,6 +40,7 @@ public class ConfirmVoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_vote);
 
+        editTextConfirmToken = findViewById(R.id.editTextConfirmToken);
         imageViewConfirmFilm = findViewById(R.id.imageViewConfirmFilm);
         textViewConfirmTitle = findViewById(R.id.textViewConfirmTitle);
         textViewFilmName = findViewById(R.id.textViewFilmName);
@@ -81,7 +84,6 @@ public class ConfirmVoteActivity extends AppCompatActivity {
             textViewConfirmTitle.setText("Escolha o diretor que deseja votar");
         }
 
-
         progressDialogOnCreate.dismiss();
     }
 
@@ -90,35 +92,43 @@ public class ConfirmVoteActivity extends AppCompatActivity {
         progressDialog.setMessage("Confirmando voto..");
         progressDialog.show();
 
-        userVote = new UserVote();
-        userVote.setIdDirector(userSession.getDirector().getId());
-        userVote.setIdFilm(userSession.getFilm().getId());
-        userVote.setToken(userSession.getToken());
-        userVote.setIdUser(userSession.getId());
+        String confirmTokenString = editTextConfirmToken.getText().toString();
+        int confirmToken = Integer.parseInt(confirmTokenString);
 
-        try {
-            Call<UserVote> call = new RetrofitConfig().getOscarService().userVote(userVote);
-            call.enqueue(new Callback<UserVote>() {
-                @Override
-                public void onResponse(Call<UserVote> call, Response<UserVote> response) {
-                    if (response.code() >= 200 && response.code() <= 299) {
-                        Intent it = new Intent(ConfirmVoteActivity.this, VotedActivity.class);
-                        startActivity(it);
+        if (confirmToken == userSession.getToken()) {
+            userVote = new UserVote();
+            userVote.setIdDirector(userSession.getDirector().getId());
+            userVote.setIdFilm(userSession.getFilm().getId());
+            userVote.setToken(userSession.getToken());
+            userVote.setIdUser(userSession.getId());
 
-                        progressDialog.dismiss();
-                        finish();
-                    } else {
-                        progressDialog.dismiss();
-                        Toast.makeText(ConfirmVoteActivity.this, "Não foi possível registrar seu voto! Verifique seu Token!", Toast.LENGTH_SHORT).show();
+            try {
+                Call<UserVote> call = new RetrofitConfig().getOscarService().userVote(userVote);
+                call.enqueue(new Callback<UserVote>() {
+                    @Override
+                    public void onResponse(Call<UserVote> call, Response<UserVote> response) {
+                        if (response.code() >= 200 && response.code() <= 299) {
+                            Intent it = new Intent(ConfirmVoteActivity.this, VotedActivity.class);
+                            startActivity(it);
+
+                            progressDialog.dismiss();
+                            finish();
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(ConfirmVoteActivity.this, "Não foi possível registrar seu voto!", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<UserVote> call, Throwable t) {
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
+                    @Override
+                    public void onFailure(Call<UserVote> call, Throwable t) {
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(ConfirmVoteActivity.this, "Token inválido!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
     }
 }

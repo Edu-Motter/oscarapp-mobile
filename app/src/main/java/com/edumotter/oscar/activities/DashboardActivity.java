@@ -38,7 +38,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         textViewDashboardTitle = findViewById(R.id.textViewFilmDetailedName);
         String userName = String.valueOf(userSession.getLogin());
-        textViewDashboardTitle.setText("Bem vindo ao The Oscar App " + userName);
+        textViewDashboardTitle.setText("Bem-vindo ao The Oscar App, " + userName);
     }
 
     @Override
@@ -51,27 +51,22 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.item1:
                 it = new Intent(this, FilmsActivity.class);
                 startActivity(it);
                 return true;
-
             case R.id.item2:
                 it = new Intent(this, DirectorsActivity.class);
                 startActivity(it);
                 return true;
-
             case R.id.item3:
                 it = new Intent(this, ConfirmVoteActivity.class);
                 startActivity(it);
                 return true;
-
             case R.id.item4:
                 finishAndRemoveTask();
                 System.exit(0);
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }

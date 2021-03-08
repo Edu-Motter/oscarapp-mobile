@@ -5,7 +5,6 @@ public class Director {
     private String name;
 
     public Director() {
-
     }
 
     public Director(Long id, String name) {

@@ -10,22 +10,25 @@
         android:id="@+id/buttonConfirmVote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="125dp"
         android:onClick="onClickConfirm"
         android:text="Confirmar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmToken" />
 
     <TextView
         android:id="@+id/textViewConfirmTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Confirme suas escolhas:"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewConfirmFilm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,33 +37,36 @@
         android:id="@+id/textViewConfirmDirector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="8dp"
         android:text="Diretor escolhido:"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDirectorName"
+        app:layout_constraintStart_toStartOf="@+id/imageViewConfirmFilm"
         app:layout_constraintTop_toBottomOf="@+id/textViewFilmName" />
 
     <TextView
         android:id="@+id/textViewConfirmFilm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="8dp"
         android:text="Filme escolhido:"
         android:textAlignment="center"
         android:textColor="@color/teal_200"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewConfirmFilm"
+        app:layout_constraintStart_toStartOf="@+id/imageViewConfirmFilm"
         app:layout_constraintTop_toBottomOf="@+id/textViewConfirmTitle" />
 
     <ImageView
         android:id="@+id/imageViewConfirmFilm"
         android:layout_width="144dp"
-        android:layout_height="187dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFilmName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewConfirmFilm"
@@ -70,8 +76,9 @@
         android:id="@+id/textViewDirectorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="45dp"
         android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textViewConfirmToken"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewConfirmDirector" />
@@ -80,31 +87,34 @@
         android:id="@+id/textViewFilmName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="18dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewConfirmDirector"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewConfirmFilm"
+        app:layout_constraintStart_toStartOf="@+id/imageViewConfirmFilm"
         app:layout_constraintTop_toBottomOf="@+id/imageViewConfirmFilm" />
 
     <EditText
         android:id="@+id/editTextConfirmToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="31dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/buttonConfirmVote"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewConfirmToken" />
 
     <TextView
         android:id="@+id/textViewConfirmToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="3dp"
         android:text="Insira seu token:"
         app:layout_constraintBottom_toTopOf="@+id/editTextConfirmToken"
-        app:layout_constraintStart_toStartOf="@+id/editTextConfirmToken" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextConfirmToken"
+        app:layout_constraintStart_toStartOf="@+id/editTextConfirmToken"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDirectorName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
