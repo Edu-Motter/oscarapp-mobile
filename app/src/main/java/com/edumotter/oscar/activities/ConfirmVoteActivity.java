@@ -47,13 +47,7 @@ public class ConfirmVoteActivity extends AppCompatActivity {
         Session session = (Session) getApplicationContext();
         userSession = session.getUserSession();
 
-        if(userSession.getFilm().getId() == 0 || userSession.getDirector().getId() == 0){
-            buttonConfirmVote.setEnabled(false);
-            textViewConfirmTitle.setText("Escolha o filme e diretor que deseja votar");
-            textViewFilmName.setText(userSession.getFilm().getName());
-            textViewDirectorName.setText(userSession.getDirector().getName());
-            imageViewConfirmFilm.setImageResource(R.drawable.film);
-        } else {
+        if (userSession.getFilm().getPhoto().contains("http")) {
             Picasso.get().load(userSession.getFilm().getPhoto())
                     .placeholder(R.drawable.loading_film)
                     .error(R.drawable.erro_film)
@@ -69,20 +63,24 @@ public class ConfirmVoteActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     });
-            textViewFilmName.setText(userSession.getFilm().getName());
-            textViewDirectorName.setText(userSession.getDirector().getName());
-
-            if (userSession.getDirector().getId() == 0 && userSession.getFilm().getId() == 0) {
-                buttonConfirmVote.setEnabled(false);
-                textViewConfirmTitle.setText("Escolha o filme e diretor deseja votar");
-            } else if (userSession.getFilm().getId() == 0) {
-                buttonConfirmVote.setEnabled(false);
-                textViewConfirmTitle.setText("Escolha o filme que deseja votar");
-            } else if (userSession.getDirector().getId() == 0) {
-                buttonConfirmVote.setEnabled(false);
-                textViewConfirmTitle.setText("Escolha o diretor que deseja votar");
-            }
+        } else {
+            imageViewConfirmFilm.setImageResource(R.drawable.film);
         }
+
+        textViewFilmName.setText(userSession.getFilm().getName());
+        textViewDirectorName.setText(userSession.getDirector().getName());
+
+        if (userSession.getDirector().getId() == 0 && userSession.getFilm().getId() == 0) {
+            buttonConfirmVote.setEnabled(false);
+            textViewConfirmTitle.setText("Escolha o filme e diretor deseja votar");
+        } else if (userSession.getFilm().getId() == 0) {
+            buttonConfirmVote.setEnabled(false);
+            textViewConfirmTitle.setText("Escolha o filme que deseja votar");
+        } else if (userSession.getDirector().getId() == 0) {
+            buttonConfirmVote.setEnabled(false);
+            textViewConfirmTitle.setText("Escolha o diretor que deseja votar");
+        }
+
 
         progressDialogOnCreate.dismiss();
     }
