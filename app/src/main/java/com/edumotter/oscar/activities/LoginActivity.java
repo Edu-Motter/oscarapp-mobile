@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         Session session = (Session) getApplicationContext();
+        session.setUserSession(new User());
         userSession = session.getUserSession();
     }
 

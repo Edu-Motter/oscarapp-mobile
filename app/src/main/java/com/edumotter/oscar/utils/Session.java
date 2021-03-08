@@ -11,4 +11,7 @@ public class Session extends Application {
         return userSession;
     }
 
+    public void setUserSession(User user){
+        this.userSession = user;
+    }
 }
